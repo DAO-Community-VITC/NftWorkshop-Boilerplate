@@ -1,51 +1,91 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import Web3Modal from "web3modal";
 import * as eth from "ethers";
+import axios from "axios";
 import { NFTStorage, Blob } from "nft.storage";
-import { Contract } from "ethers";
-import abi from "./utils";
+import { abi } from './utils'
+import * as dotenv from 'dotenv'
+// to configure the enivronment variables
+dotenv.config()
 
-export const BlockchainConfig = React.createContext();
+export const BlockchainConfig = createContext();
 
 export const BlockchainProvider = ({ children }) => {
-  
-  const contr_addr = process.env.REACT_APP_CONTRACT;
-  const NFT_STORAGE_TOKEN = process.env.REACT_APP_PUBLIC_NFT_STORAGE_TOKEN;
-  const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
-  const provider = new eth.JsonRpcProvider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new Contract(contr_addr, abi, signer);
+  // define useState for currentAccount
 
-  const [currentAccount, setCurrentAccount] = useState("");
+  // define environment variables here... 
+  const contr_addr
+  const NFT_STORAGE_TOKEN
 
+  // define NFTStorage client here
+  const client;
+
+
+  const provider;
+  const signer;
+  const contract;
+
+  // function to connect to the ethereum wallet
   const connectWallet = async () => {
-    if (!window.ethereum) return alert("Please install MetaMask.");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    setCurrentAccount(accounts[0]);
-    window.location.reload();
+
   };
 
+  // auto wallet connection method (fn definition same as the connectWallet function) and this method is to be used only inside the useEffect hooks
   const checkIfWalletIsConnect = async () => {
-    if (!window.ethereum) return alert("Please install MetaMask.");
 
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+  };
 
-    if (accounts.length) {
-      setCurrentAccount(accounts[0]);
-    } else {
-      console.log("No accounts found");
-    }
+  // define uploadToIPFS method to upload our image file to the NFT Storage and get the file url for it
+  const uploadToIPFS = async (file) => {
+
+  };
+
+  // define createNFT method to send the nft metadata to IPFS, get the cid and finally call the create sale function to mint our final token
+  const createNFT = async (formInput, fileUrl) => {
+
+  };
+
+  // createsale function defintion here, to create token 
+  const createSale = async (url, formInputPrice, isReselling, id) => {
+
+  };
+
+  // this function is used for our marketplace page
+  const fetchNFTs = async (setLoading) => {
+    setLoading(true);
+    const data = await contract.fetchMarketItems();
+    const items = await Promise.all(
+      data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+        const tokenURI = await contract.tokenURI(tokenId);
+        const {
+          data: { image, name, description },
+        } = await axios.get(tokenURI);
+        const price = eth.utils.formatUnits(
+          unformattedPrice.toString(),
+          "ether"
+        );
+        image.replace("https:ipfs.io", "https://infura-ipfs.io");
+        console.log(image);
+        return {
+          price,
+          tokenId: tokenId.toNumber(),
+          seller,
+          owner,
+          image,
+          name,
+          description,
+          tokenURI,
+        };
+      })
+    );
+    return items;
   };
 
   useEffect(() => {
     checkIfWalletIsConnect();
   }, []);
-
-
   return (
-    <BlockchainConfig.Provider value={{}}>{children}</BlockchainConfig.Provider>
+    <BlockchainConfig.Provider value={{ fetchNFTs, uploadToIPFS, createNFT, createSale, currentAccount, checkIfWalletIsConnect, connectWallet }}>{children}</BlockchainConfig.Provider>
   );
 };
