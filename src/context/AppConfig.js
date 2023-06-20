@@ -1,5 +1,4 @@
 import React, { useEffect, useState, createContext } from "react";
-import Web3Modal from "web3modal";
 import * as eth from "ethers";
 import axios from "axios";
 import { NFTStorage, Blob } from "nft.storage";
@@ -13,7 +12,7 @@ export const BlockchainConfig = createContext();
 export const BlockchainProvider = ({ children }) => {
 
   // define useState for currentAccount
-
+  const [currentAccount, setCurrentAccount] = useState("")
   // define environment variables here... 
   const contr_addr
   const NFT_STORAGE_TOKEN
@@ -85,6 +84,9 @@ export const BlockchainProvider = ({ children }) => {
   useEffect(() => {
     checkIfWalletIsConnect();
   }, []);
+
+
+
   return (
     <BlockchainConfig.Provider value={{ fetchNFTs, uploadToIPFS, createNFT, createSale, currentAccount, checkIfWalletIsConnect, connectWallet }}>{children}</BlockchainConfig.Provider>
   );

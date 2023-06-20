@@ -14,7 +14,6 @@ function App() {
             <Route path="/market" element={<Market />} />
           </Routes>
         </BrowserRouter>
-
       </BlockchainProvider>
     </div>
   );
