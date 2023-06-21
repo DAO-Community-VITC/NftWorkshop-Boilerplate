@@ -1,6 +1,6 @@
 
 ## Instructions and Links
-
+contract addr = "0x198af7665132a5eD4C1caD85Da3E9c6A79C4271b"
  - Install Node.js - https://nodejs.org/en
  - Install Git - https://git-scm.com/downloads
  - NFT Storage - https://nft.storage
