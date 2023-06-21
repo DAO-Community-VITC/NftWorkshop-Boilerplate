@@ -12,7 +12,7 @@ export const BlockchainConfig = createContext();
 export const BlockchainProvider = ({ children }) => {
 
   // define useState for currentAccount
-  const [currentAccount, setCurrentAccount] = useState("")
+  ``
   // define environment variables here... 
   const contr_addr
   const NFT_STORAGE_TOKEN
