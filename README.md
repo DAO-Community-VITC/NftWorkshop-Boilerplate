@@ -2,8 +2,10 @@
 ## Instructions and Links
 
  - Install Node.js - https://nodejs.org/en
- - NFT Storage - 
- - Clone this repository 
+ - Install Git - https://git-scm.com/downloads
+ - NFT Storage - https://nft.storage
+ - Clone this repository
+   ``git clone "https://github.com/DAO-Community-VITC/NftWorkshop-Boilerplate"``
  - Do   `` npm i`` after cloning the repository to install all the dependencies and packages
  - Install Metamask Extension -https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn 
  - Remix IDE - https://remix.ethereum.org/
