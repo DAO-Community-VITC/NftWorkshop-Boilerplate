@@ -1,8 +1,6 @@
 ## API keys for testing (if neccessary)
 nft_storage_key = ``eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBmQmJiQzY5MjQ5MjU3YzVmRTNiNjBlOWNkNDU5OTFkNDM4MmZGMmUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1NjY2MTgwMzQ4MCwibmFtZSI6ImZsYW1lcyJ9.M4XFbaGe1BLGGBJT6LPekwUJB9gA8qsNla2I1RsnMHU``
 
-Contract Address (Updated!) = ``0x7A7A8CE7C89647C5A461E20589B2E5f3A17e88F0``
-
 Make sure to name your environment file as  ```.env.local```.
 
 ## Instructions and Links
